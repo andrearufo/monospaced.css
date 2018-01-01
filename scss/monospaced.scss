@@ -1,0 +1,207 @@
+@import 'reset';
+@import url('https://fonts.googleapis.com/css?family=Anonymous+Pro:400,400i,700,700i');
+
+// variables
+$background-color: #fff;
+$font-color: #666;
+$light-color: lighten($font-color, 50%);
+$font-size-base: 1rem;
+$font-family-base: 'Anonymous Pro', monospace;
+$line-height-base: 1.6;
+$link-color: #00d;
+$link-hover-color: darken($link-color, 10%);
+$spacer: 1rem;
+$breakpoint: 768px;
+$input-height: 3rem;
+
+// mixin for responsive
+@mixin responsive($size) {
+    @if $size == large {
+        @media (min-width: $breakpoint) {
+            @content;
+        }
+    } @else {
+        @media (max-width: $breakpoint) {
+            @content;
+        }
+    }
+}
+
+.transition{
+    transition: all .3s;
+}
+
+/*
+@include responsive(large){
+    background: red;
+}
+@include responsive(small){
+    background: yellow;
+}
+*/
+
+// style
+body,
+h1, h2, h3, h4, h5, h6,
+p, ul, li, code, pre, span,
+label, input, button, textarea, select,
+div, section, header, footer, main, aside
+{
+    color: $font-color;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: $line-height-base;
+}
+
+body{
+    background-color: $background-color;
+}
+
+.container{
+    max-width: $breakpoint;
+    margin: $spacer*4 auto;
+    padding: $spacer;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-weight: 700;
+    margin: $spacer*2 0 $spacer 0;
+}
+
+p{
+    margin-bottom: $spacer;
+}
+
+ul{
+    li{
+        padding-left: $spacer*2;
+        position: relative;
+
+        &::before{
+            position: absolute;
+            left: 0;
+            top: 0;
+            content: '- ';
+        }
+    }
+}
+
+a{
+    color: $link-color;
+    text-decoration: none;
+
+    &:hover{
+        color: $link-hover-color;
+        text-decoration: underline;
+    }
+}
+
+b, strong{
+    font-weight: bold;
+}
+
+em, i{
+    font-style: italic;
+}
+
+label, input, textarea, select{
+    display: block;
+    width: 100%;
+    padding: $spacer;
+}
+
+input, select{
+    height: $input-height;
+}
+
+.btn{
+    line-height: $input-height;
+    border: 1px solid $link-color;
+    color: $link-color;
+    text-align: center;
+    display: block;
+    width: 100%;
+
+    &:hover{
+        background: $link-color;
+        color: $background-color;
+        text-decoration: none;
+    }
+}
+
+input, textarea, select{
+    background: $background-color;
+    border: 1px solid $light-color;
+    border-radius: 0;
+
+    &:disabled{
+        background: $light-color;
+    }
+}
+
+button{
+    @extend .btn;
+}
+
+.block{
+    margin-bottom: $spacer;
+}
+
+.card{
+    padding: $spacer;
+    margin: $spacer 0;
+    border: 1px solid $light-color;
+}
+
+code{
+    background: $light-color;
+    padding: 2px 6px;
+}
+
+pre{
+    background: $light-color;
+    padding: $spacer;
+    overflow-x: scroll;
+}
+
+hr{
+    border: 0;
+    border-top: 1px solid $light-color;
+    margin: ($spacer * 2) 0;
+}
+
+@each $a in left, center, right{
+
+    .text-#{$a}-large {
+        @include responsive(large){
+            text-align: $a;
+        }
+    }
+
+    .text-#{$a}-small {
+        @include responsive(small){
+            text-align: $a;
+        }
+    }
+
+    .text-#{$a}{
+        text-align: $a;
+    }
+
+}
+
+// simbols for heading titles
+$c: '';
+@for $i from 1 through 6 {
+    $c: $c + '#';
+
+    h#{$i} {
+        &::before{
+            padding-right: $spacer;
+            content: $c;
+        }
+    }
+}

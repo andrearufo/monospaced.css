@@ -1,0 +1,30 @@
+{
+  "name": "monospaced-css",
+  "version": "0.0.1",
+  "description": "A supersimple, monospaced, modular, flat stylesheet made in SASS for simple pages",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo Please open README.md file"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrearufo/monospaced.css.git"
+  },
+  "author": "andrearufo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrearufo/monospaced.css/issues"
+  },
+  "homepage": "https://github.com/andrearufo/monospaced.css#readme",
+  "devDependencies": {
+    "autoprefixer": "^7.2.3",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-postcss": "^7.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.2",
+    "pump": "^2.0.0"
+  },
+  "dependencies": {}
+}
