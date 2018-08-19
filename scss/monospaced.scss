@@ -10,6 +10,7 @@ $font-family-base: 'IBM Plex Mono', monospace;
 $line-height-base: 1.6;
 $link-color: #00d;
 $link-hover-color: darken($link-color, 10%);
+$alert-color: #ffeaa7;
 $spacer: 1rem;
 $breakpoint: 768px;
 $input-height: 3rem;
@@ -151,7 +152,7 @@ button{
 }
 
 .alert{
-    background: #ffeaa7;
+    background: $alert-color;
     padding: $spacer;
 }
 
