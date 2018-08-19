@@ -1,12 +1,12 @@
 @import 'reset';
-@import url('https://fonts.googleapis.com/css?family=Anonymous+Pro:400,400i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i');
 
 // variables
 $background-color: #fff;
 $font-color: #666;
 $light-color: lighten($font-color, 50%);
 $font-size-base: 1rem;
-$font-family-base: 'Anonymous Pro', monospace;
+$font-family-base: 'IBM Plex Mono', monospace;
 $line-height-base: 1.6;
 $link-color: #00d;
 $link-hover-color: darken($link-color, 10%);
@@ -148,6 +148,11 @@ button{
 
 .block{
     margin-bottom: $spacer;
+}
+
+.alert{
+    background: #ffeaa7;
+    padding: $spacer;
 }
 
 .card{

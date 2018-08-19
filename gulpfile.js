@@ -1,34 +1,33 @@
-var gulp = require('gulp');
-var pump = require('pump');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var postcss = require('gulp-postcss');
-var autoprefixer = require('autoprefixer');
-var rename = require('gulp-rename');
-var cleanCSS = require('gulp-clean-css');
+var gulp 			= require('gulp'),
+    notify 			= require('gulp-notify'),
+    sass 			= require('gulp-sass'),
+	sourcemaps      = require('gulp-sourcemaps'),
+	postcss 		= require('gulp-postcss'),
+	autoprefixer 	= require('autoprefixer'),
+    rename          = require('gulp-rename');
+    cleanCSS        = require('gulp-clean-css');
 
-// Tasks
-
-gulp.task('styles', function (cb) {
-    pump([
-        gulp.src('scss/monospaced.scss'),
-        sourcemaps.init(),
-        sass().on('error', sass.logError),
-        postcss([autoprefixer({browsers: ['last 1 version']})]),
-        sourcemaps.write('.'),
-        gulp.dest('dist')
-    ], cb);
+gulp.task('styles', function(){
+    gulp.src('scss/monospaced.scss')
+		.pipe( sourcemaps.init() )
+		.pipe( sass().on('error', function(err) {
+				return notify().write(err);
+			})
+		)
+		.pipe( postcss([autoprefixer({ browsers: ['last 1 version'] })]) )
+		.pipe( sourcemaps.write('.') )
+		.pipe( gulp.dest('dist') )
+        .pipe( notify({ message: "Styles compiled!", onLast: true }) );
 });
 
-gulp.task('minify', function (cb) {
-    pump([
-        gulp.src('dist/monospaced.css'),
-        sourcemaps.init(),
-        rename({ extname: '.min.css' }),
-        cleanCSS({compatibility: 'ie8'}),
-        sourcemaps.write('.'),
-        gulp.dest('dist')
-    ], cb);
+gulp.task('minify', function(){
+    gulp.src('dist/monospaced.css')
+        .pipe( sourcemaps.init() )
+        .pipe( rename({ extname: '.min.css' }) )
+        .pipe( cleanCSS({compatibility: 'ie8'}) )
+        .pipe( sourcemaps.write('.') )
+        .pipe( gulp.dest('dist') )
+        .pipe( notify({message: "Minify compiled!", onLast: true}) );
 });
 
 gulp.task('watch', function () {

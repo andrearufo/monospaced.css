@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css?family=Anonymous+Pro:400,400i,700,700i");
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -63,7 +63,7 @@ p, ul, li, code, pre, span,
 label, input, button, textarea, select,
 div, section, header, footer, main, aside {
   color: #666;
-  font-family: "Anonymous Pro", monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-size: 1rem;
   margin: 0;
   padding: 0;
@@ -136,6 +136,10 @@ input, textarea, select {
 
 .block {
   margin-bottom: 1rem; }
+
+.alert {
+  background: #ffeaa7;
+  padding: 1rem; }
 
 .card {
   padding: 1rem;
