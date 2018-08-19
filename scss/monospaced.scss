@@ -76,6 +76,12 @@ p{
     margin-bottom: $spacer;
 }
 
+img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 ul{
     li{
         padding-left: $spacer*2;

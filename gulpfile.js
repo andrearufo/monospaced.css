@@ -30,9 +30,15 @@ gulp.task('minify', function(){
         .pipe( notify({message: "Minify compiled!", onLast: true}) );
 });
 
+gulp.task('copytodocs', function(){
+    gulp.src('dist/monospaced.min.css')
+        .pipe( gulp.dest('docs') );
+});
+
 gulp.task('watch', function () {
     gulp.watch('scss/*.scss', ['styles']);
     gulp.watch('dist/monospaced.css', ['minify']);
+    gulp.watch('dist/monospaced.min.css', ['copytodocs']);
 });
 
 gulp.task('default', ['watch']);
