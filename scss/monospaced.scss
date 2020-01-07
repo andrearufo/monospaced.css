@@ -1,3 +1,13 @@
+/*
+
+	monospaced.css
+	by Andrea Rufo
+	www.andrearufo.it
+
+	ver. 20200107
+
+ */
+
 @import 'reset';
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i');
 
@@ -7,8 +17,8 @@ $font-color: #666;
 $light-color: lighten($font-color, 50%);
 $font-size-base: 1rem;
 $font-family-base: 'IBM Plex Mono', monospace;
-$line-height-base: 1.6;
-$link-color: #00d;
+$line-height-base: 1.4;
+$link-color: #0F4C81; // #004B85;
 $link-hover-color: darken($link-color, 10%);
 $alert-color: #ffeaa7;
 $spacer: 1rem;

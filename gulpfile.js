@@ -1,44 +1,76 @@
-var gulp 			= require('gulp'),
-    notify 			= require('gulp-notify'),
-    sass 			= require('gulp-sass'),
-	sourcemaps      = require('gulp-sourcemaps'),
-	postcss 		= require('gulp-postcss'),
-	autoprefixer 	= require('autoprefixer'),
-    rename          = require('gulp-rename');
-    cleanCSS        = require('gulp-clean-css');
+var paths = {
+	styles: {
+		src: 'scss',
+		dest: 'dist'
+	},
+	docs: 'docs'
+};
 
-gulp.task('styles', function(){
-    gulp.src('scss/monospaced.scss')
-		.pipe( sourcemaps.init() )
-		.pipe( sass().on('error', function(err) {
-				return notify().write(err);
-			})
-		)
-		.pipe( postcss([autoprefixer({ browsers: ['last 1 version'] })]) )
-		.pipe( sourcemaps.write('.') )
-		.pipe( gulp.dest('dist') )
-        .pipe( notify({ message: "Styles compiled!", onLast: true }) );
-});
+let gulp = require('gulp');
+let sourcemaps = require('gulp-sourcemaps');
+let sass = require('gulp-sass');
+let rename = require('gulp-rename');
+let postcss = require('gulp-postcss');
+let autoprefixer = require('autoprefixer');
+let cssnano = require('cssnano');
+let browserSync = require('browser-sync').create();
 
-gulp.task('minify', function(){
-    gulp.src('dist/monospaced.css')
-        .pipe( sourcemaps.init() )
-        .pipe( rename({ extname: '.min.css' }) )
-        .pipe( cleanCSS({compatibility: 'ie8'}) )
-        .pipe( sourcemaps.write('.') )
-        .pipe( gulp.dest('dist') )
-        .pipe( notify({message: "Minify compiled!", onLast: true}) );
-});
+function styles(done) {
+	return (
+		gulp
+		.src(paths.styles.src+'/*.scss')
+		.pipe(sourcemaps.init())
 
-gulp.task('copytodocs', function(){
-    gulp.src('dist/monospaced.min.css')
-        .pipe( gulp.dest('docs') );
-});
+		.pipe(sass({
+			outputStyle: 'expanded'
+		}).on('error', sass.logError))
+		.pipe(postcss([autoprefixer()]))
+		.pipe(gulp.dest(paths.styles.dest))
 
-gulp.task('watch', function () {
-    gulp.watch('scss/*.scss', ['styles']);
-    gulp.watch('dist/monospaced.css', ['minify']);
-    gulp.watch('dist/monospaced.min.css', ['copytodocs']);
-});
+		.pipe(sass({
+			outputStyle: 'compressed'
+		}).on('error', sass.logError))
+		.pipe(postcss([autoprefixer(), cssnano()]))
+		.pipe(rename({ suffix: '.min' }))
 
-gulp.task('default', ['watch']);
+		.pipe(sourcemaps.write('.'))
+		.pipe(gulp.dest(paths.styles.dest))
+
+		.pipe(browserSync.stream())
+	);
+	done();
+}
+exports.styles = styles;
+
+function copytodocs(done){
+	return(
+		gulp
+		.src(paths.styles.dest+'/monospaced.min.css')
+		.pipe(gulp.dest(paths.docs))
+	);
+	done();
+}
+exports.copytodocs = copytodocs;
+
+function serve(){
+	browserSync.init({
+		server: {
+            baseDir: './'+paths.docs
+        }
+	});
+
+	watch();
+	gulp.watch('*.html').on('change', browserSync.reload);
+}
+exports.serve = serve;
+
+function watch(){
+	gulp.watch(paths.styles.src+'/*.scss', gulp.series('styles'));
+	gulp.watch(paths.styles.src+'/monospaced.min.css', gulp.series('copytodocs'));
+}
+exports.watch = watch;
+
+function start(){
+	serve();
+}
+exports.default = start;
