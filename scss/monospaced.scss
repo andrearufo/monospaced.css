@@ -1,229 +1,385 @@
-/*
-
-	monospaced.css
-	by Andrea Rufo
-	www.andrearufo.it
-
-	ver. 20200107
-
+/*!
+ * monospaced.css v1.0.0
+ * A super simple, monospaced, flat stylesheet for simple pages.
+ * https://github.com/andrearufo/monospaced.css
+ * (c) Andrea Rufo - https://www.andrearufo.it - GPL-3.0
  */
 
-@import 'reset';
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i');
+@use 'sass:color';
+@use 'reset';
 
-// variables
-$background-color: #fff;
-$font-color: #666;
-$light-color: lighten($font-color, 50%);
-$font-size-base: 1rem;
-$font-family-base: 'IBM Plex Mono', monospace;
-$line-height-base: 1.4;
-$link-color: #0F4C81; // #004B85;
-$link-hover-color: darken($link-color, 10%);
-$alert-color: #ffeaa7;
-$spacer: 1rem;
-$breakpoint: 768px;
-$input-height: 3rem;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
-// mixin for responsive
+// -----------------------------------------------------------------------------
+// Settings: override with `@use 'monospaced' with ($link-color: red);`
+// -----------------------------------------------------------------------------
+
+$font-family-base: 'IBM Plex Mono', ui-monospace, monospace !default;
+$font-size-base: 1rem !default;
+$line-height-base: 1.4 !default;
+
+$background-color: #fff !default;
+$font-color: #666 !default;
+$light-color: color.adjust($font-color, $lightness: 50%) !default;
+$border-color: #8c8c8c !default;
+$link-color: #0f4c81 !default;
+$link-hover-color: color.adjust($link-color, $lightness: -10%) !default;
+$alert-color: #ffeaa7 !default;
+
+$enable-dark-mode: true !default;
+$dark-background-color: #1b1b1b !default;
+$dark-font-color: #c8c8c8 !default;
+$dark-light-color: #333 !default;
+$dark-border-color: #777 !default;
+$dark-link-color: #6fa8dc !default;
+$dark-link-hover-color: #9cc3e6 !default;
+$dark-alert-color: #4a3f17 !default;
+
+$spacer: 1rem !default;
+$breakpoint: 768px !default;
+$input-height: 3rem !default;
+
+// -----------------------------------------------------------------------------
+// Helpers
+// -----------------------------------------------------------------------------
+
 @mixin responsive($size) {
-    @if $size == large {
-        @media (min-width: $breakpoint) {
-            @content;
-        }
-    } @else {
-        @media (max-width: $breakpoint) {
-            @content;
-        }
+  @if $size == large {
+    @media (min-width: $breakpoint) {
+      @content;
     }
-}
-
-.transition{
-    transition: all .3s;
-}
-
-/*
-@include responsive(large){
-    background: red;
-}
-@include responsive(small){
-    background: yellow;
-}
-*/
-
-// style
-body,
-h1, h2, h3, h4, h5, h6,
-p, ul, li, code, pre, span,
-label, input, button, textarea, select,
-div, section, header, footer, main, aside
-{
-    color: $font-color;
-    font-family: $font-family-base;
-    font-size: $font-size-base;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    line-height: $line-height-base;
-}
-
-body{
-    background-color: $background-color;
-}
-
-.container{
-    max-width: $breakpoint;
-    margin: $spacer*4 auto;
-    padding: $spacer;
-}
-
-h1, h2, h3, h4, h5, h6{
-    font-weight: 700;
-    margin: $spacer*2 0 $spacer 0;
-}
-
-p{
-    margin-bottom: $spacer;
-}
-
-img{
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-ul{
-    li{
-        padding-left: $spacer*2;
-        position: relative;
-
-        &::before{
-            position: absolute;
-            left: 0;
-            top: 0;
-            content: '- ';
-        }
+  } @else {
+    @media (max-width: ($breakpoint - 0.02px)) {
+      @content;
     }
+  }
 }
 
-a{
-    color: $link-color;
-    text-decoration: none;
+// -----------------------------------------------------------------------------
+// Theme (CSS custom properties, overridable at runtime)
+// -----------------------------------------------------------------------------
 
-    &:hover{
-        color: $link-hover-color;
-        text-decoration: underline;
+:root {
+  --mono-bg: #{$background-color};
+  --mono-color: #{$font-color};
+  --mono-light: #{$light-color};
+  --mono-border: #{$border-color};
+  --mono-link: #{$link-color};
+  --mono-link-hover: #{$link-hover-color};
+  --mono-alert: #{$alert-color};
+
+  color-scheme: light;
+}
+
+@if $enable-dark-mode {
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --mono-bg: #{$dark-background-color};
+      --mono-color: #{$dark-font-color};
+      --mono-light: #{$dark-light-color};
+      --mono-border: #{$dark-border-color};
+      --mono-link: #{$dark-link-color};
+      --mono-link-hover: #{$dark-link-hover-color};
+      --mono-alert: #{$dark-alert-color};
+
+      color-scheme: dark;
     }
+  }
 }
 
-b, strong{
-    font-weight: bold;
+// -----------------------------------------------------------------------------
+// Base
+// -----------------------------------------------------------------------------
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-em, i{
-    font-style: italic;
+body {
+  background-color: var(--mono-bg);
+  color: var(--mono-color);
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  accent-color: var(--mono-link);
 }
 
-label, input, textarea, select{
-    display: block;
-    width: 100%;
-    padding: $spacer;
+:focus-visible {
+  outline: 2px solid var(--mono-link);
+  outline-offset: 2px;
 }
 
-input, select{
-    height: $input-height;
+.container {
+  max-width: $breakpoint;
+  margin: ($spacer * 4) auto;
+  padding: $spacer;
 }
 
-.btn{
-    line-height: $input-height;
-    border: 1px solid $link-color;
-    color: $link-color;
-    text-align: center;
-    display: block;
-    width: 100%;
+// -----------------------------------------------------------------------------
+// Typography
+// -----------------------------------------------------------------------------
 
-    &:hover{
-        background: $link-color;
-        color: $background-color;
-        text-decoration: none;
-    }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  margin: ($spacer * 2) 0 $spacer;
 }
 
-input, textarea, select{
-    background: $background-color;
-    border: 1px solid $light-color;
-    border-radius: 0;
-
-    &:disabled{
-        background: $light-color;
-    }
-}
-
-button{
-    @extend .btn;
-}
-
-.block{
-    margin-bottom: $spacer;
-}
-
-.alert{
-    background: $alert-color;
-    padding: $spacer;
-}
-
-.card{
-    padding: $spacer;
-    margin: $spacer 0;
-    border: 1px solid $light-color;
-}
-
-code{
-    background: $light-color;
-    padding: 2px 6px;
-}
-
-pre{
-    background: $light-color;
-    padding: $spacer;
-    overflow-x: scroll;
-}
-
-hr{
-    border: 0;
-    border-top: 1px solid $light-color;
-    margin: ($spacer * 2) 0;
-}
-
-@each $a in left, center, right{
-
-    .text-#{$a}-large {
-        @include responsive(large){
-            text-align: $a;
-        }
-    }
-
-    .text-#{$a}-small {
-        @include responsive(small){
-            text-align: $a;
-        }
-    }
-
-    .text-#{$a}{
-        text-align: $a;
-    }
-
-}
-
-// simbols for heading titles
-$c: '';
+// Markdown-like `#` prefixes for headings
+$hashes: '';
 @for $i from 1 through 6 {
-    $c: $c + '#';
+  $hashes: $hashes + '#';
 
-    h#{$i} {
-        &::before{
-            padding-right: $spacer;
-            content: $c;
-        }
+  h#{$i}::before {
+    content: $hashes;
+    padding-right: $spacer;
+  }
+}
+
+p,
+ul,
+ol,
+blockquote,
+pre,
+table {
+  margin-bottom: $spacer;
+}
+
+a {
+  color: var(--mono-link);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--mono-link-hover);
+    text-decoration: underline;
+  }
+}
+
+b,
+strong {
+  font-weight: 700;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+blockquote {
+  border-left: 2px solid var(--mono-border);
+  padding-left: $spacer;
+}
+
+code {
+  background: var(--mono-light);
+  padding: 2px 6px;
+}
+
+pre {
+  background: var(--mono-light);
+  padding: $spacer;
+  overflow-x: auto;
+
+  code {
+    background: none;
+    padding: 0;
+  }
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--mono-light);
+  margin: ($spacer * 2) 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// -----------------------------------------------------------------------------
+// Lists
+// -----------------------------------------------------------------------------
+
+li {
+  position: relative;
+  padding-left: $spacer * 2;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+ul > li::before {
+  content: '-';
+}
+
+ol {
+  counter-reset: item;
+
+  > li {
+    counter-increment: item;
+
+    &::before {
+      content: counter(item) '.';
     }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Tables
+// -----------------------------------------------------------------------------
+
+table {
+  width: 100%;
+}
+
+th,
+td {
+  padding: ($spacer * 0.5) $spacer;
+  border-bottom: 1px solid var(--mono-light);
+  text-align: left;
+}
+
+th {
+  font-weight: 700;
+}
+
+// -----------------------------------------------------------------------------
+// Forms
+// -----------------------------------------------------------------------------
+
+input,
+button,
+textarea,
+select {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+label,
+input,
+textarea,
+select {
+  display: block;
+  width: 100%;
+}
+
+label {
+  padding: $spacer;
+}
+
+input,
+select {
+  height: $input-height;
+  padding: 0 $spacer;
+}
+
+textarea {
+  min-height: $input-height * 3;
+  padding: $spacer;
+  resize: vertical;
+}
+
+input,
+textarea,
+select {
+  background: var(--mono-bg);
+  border: 1px solid var(--mono-border);
+  border-radius: 0;
+
+  &:disabled {
+    background: var(--mono-light);
+    cursor: not-allowed;
+  }
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  margin-right: $spacer * 0.5;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 0 $spacer;
+  border: 1px solid var(--mono-link);
+  background: transparent;
+  color: var(--mono-link);
+  line-height: $input-height;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--mono-link);
+    color: var(--mono-bg);
+    text-decoration: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+button {
+  @extend .btn;
+}
+
+// -----------------------------------------------------------------------------
+// Components
+// -----------------------------------------------------------------------------
+
+.block {
+  margin-bottom: $spacer;
+}
+
+.alert {
+  background: var(--mono-alert);
+  padding: $spacer;
+}
+
+.card {
+  padding: $spacer;
+  margin: $spacer 0;
+  border: 1px solid var(--mono-light);
+}
+
+// -----------------------------------------------------------------------------
+// Utilities
+// -----------------------------------------------------------------------------
+
+.transition {
+  transition: all 0.3s;
+}
+
+@each $align in left, center, right {
+  .text-#{$align} {
+    text-align: $align;
+  }
+
+  .text-#{$align}-large {
+    @include responsive(large) {
+      text-align: $align;
+    }
+  }
+
+  .text-#{$align}-small {
+    @include responsive(small) {
+      text-align: $align;
+    }
+  }
 }

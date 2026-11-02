@@ -1,31 +1,38 @@
 {
-	"name": "monospaced-css",
-	"version": "0.0.1",
-	"description": "A supersimple, monospaced, modular, flat stylesheet made in SASS for simple pages",
-	"main": "gulpfile.js",
-	"scripts": {
-		"test": "echo Please open README.md file"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/andrearufo/monospaced.css.git"
-	},
-	"author": "andrearufo",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/andrearufo/monospaced.css/issues"
-	},
-	"homepage": "https://github.com/andrearufo/monospaced.css#readme",
-	"devDependencies": {},
-	"dependencies": {
-		"autoprefixer": "^9.7.3",
-		"browser-sync": "^2.26.7",
-		"gulp": "^4.0.2",
-		"gulp-cssnano": "^2.1.3",
-		"gulp-postcss": "^8.0.0",
-		"gulp-rename": "^2.0.0",
-		"gulp-sass": "^4.0.2",
-		"gulp-sourcemaps": "^2.6.5",
-		"node-sass": "^4.13.0"
-	}
+  "name": "monospaced-css",
+  "version": "1.0.0",
+  "description": "A super simple, monospaced, flat, classless-friendly stylesheet for simple pages",
+  "keywords": [
+    "css",
+    "scss",
+    "sass",
+    "monospace",
+    "stylesheet",
+    "minimal",
+    "framework"
+  ],
+  "homepage": "https://andrearufo.github.io/monospaced.css/",
+  "bugs": {
+    "url": "https://github.com/andrearufo/monospaced.css/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrearufo/monospaced.css.git"
+  },
+  "license": "GPL-3.0-only",
+  "author": "Andrea Rufo (https://www.andrearufo.it)",
+  "main": "dist/monospaced.css",
+  "style": "dist/monospaced.css",
+  "sass": "scss/monospaced.scss",
+  "files": [
+    "dist",
+    "scss"
+  ],
+  "scripts": {
+    "build": "sass --no-source-map scss/monospaced.scss dist/monospaced.css && sass --no-source-map --style=compressed scss/monospaced.scss dist/monospaced.min.css && cp dist/monospaced.min.css docs/",
+    "watch": "sass --watch --no-source-map scss/monospaced.scss docs/monospaced.min.css"
+  },
+  "devDependencies": {
+    "sass": "^1.107.1"
+  }
 }

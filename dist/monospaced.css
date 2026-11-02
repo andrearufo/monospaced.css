@@ -1,17 +1,14 @@
-/*
-
-	monospaced.css
-	by Andrea Rufo
-	www.andrearufo.it
-
-	ver. 20200107
-
+/*!
+ * monospaced.css v1.0.0
+ * A super simple, monospaced, flat stylesheet for simple pages.
+ * https://github.com/andrearufo/monospaced.css
+ * (c) Andrea Rufo - https://www.andrearufo.it - GPL-3.0
  */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap");
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -53,7 +50,7 @@ blockquote, q {
 
 blockquote:before, blockquote:after,
 q:before, q:after {
-  content: '';
+  content: "";
   content: none;
 }
 
@@ -62,35 +59,47 @@ table {
   border-spacing: 0;
 }
 
-.transition {
-  -webkit-transition: all .3s;
-  transition: all .3s;
+:root {
+  --mono-bg: #fff;
+  --mono-color: #666;
+  --mono-light: rgb(90%, 90%, 90%);
+  --mono-border: #8c8c8c;
+  --mono-link: #0f4c81;
+  --mono-link-hover: rgb(3.7990196078%, 19.2483660131%, 32.6715686275%);
+  --mono-alert: #ffeaa7;
+  color-scheme: light;
 }
 
-/*
-@include responsive(large){
-    background: red;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --mono-bg: #1b1b1b;
+    --mono-color: #c8c8c8;
+    --mono-light: #333;
+    --mono-border: #777;
+    --mono-link: #6fa8dc;
+    --mono-link-hover: #9cc3e6;
+    --mono-alert: #4a3f17;
+    color-scheme: dark;
+  }
 }
-@include responsive(small){
-    background: yellow;
-}
-*/
-body,
-h1, h2, h3, h4, h5, h6,
-p, ul, li, code, pre, span,
-label, input, button, textarea, select,
-div, section, header, footer, main, aside {
-  color: #666;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 1rem;
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  line-height: 1.4;
 }
 
 body {
-  background-color: #fff;
+  background-color: var(--mono-bg);
+  color: var(--mono-color);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 1rem;
+  line-height: 1.4;
+  accent-color: var(--mono-link);
+}
+
+:focus-visible {
+  outline: 2px solid var(--mono-link);
+  outline-offset: 2px;
 }
 
 .container {
@@ -99,84 +108,219 @@ body {
   padding: 1rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
-  margin: 2rem 0 1rem 0;
+  margin: 2rem 0 1rem;
 }
 
-p {
+h1::before {
+  content: "#";
+  padding-right: 1rem;
+}
+
+h2::before {
+  content: "##";
+  padding-right: 1rem;
+}
+
+h3::before {
+  content: "###";
+  padding-right: 1rem;
+}
+
+h4::before {
+  content: "####";
+  padding-right: 1rem;
+}
+
+h5::before {
+  content: "#####";
+  padding-right: 1rem;
+}
+
+h6::before {
+  content: "######";
+  padding-right: 1rem;
+}
+
+p,
+ul,
+ol,
+blockquote,
+pre,
+table {
   margin-bottom: 1rem;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-ul li {
-  padding-left: 2rem;
-  position: relative;
-}
-
-ul li::before {
-  position: absolute;
-  left: 0;
-  top: 0;
-  content: '- ';
-}
-
 a {
-  color: #0F4C81;
+  color: var(--mono-link);
   text-decoration: none;
 }
-
 a:hover {
-  color: #0a3153;
+  color: var(--mono-link-hover);
   text-decoration: underline;
 }
 
-b, strong {
-  font-weight: bold;
+b,
+strong {
+  font-weight: 700;
 }
 
-em, i {
+em,
+i {
   font-style: italic;
 }
 
-label, input, textarea, select {
+blockquote {
+  border-left: 2px solid var(--mono-border);
+  padding-left: 1rem;
+}
+
+code {
+  background: var(--mono-light);
+  padding: 2px 6px;
+}
+
+pre {
+  background: var(--mono-light);
+  padding: 1rem;
+  overflow-x: auto;
+}
+pre code {
+  background: none;
+  padding: 0;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--mono-light);
+  margin: 2rem 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+li {
+  position: relative;
+  padding-left: 2rem;
+}
+li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+ul > li::before {
+  content: "-";
+}
+
+ol {
+  counter-reset: item;
+}
+ol > li {
+  counter-increment: item;
+}
+ol > li::before {
+  content: counter(item) ".";
+}
+
+table {
+  width: 100%;
+}
+
+th,
+td {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--mono-light);
+  text-align: left;
+}
+
+th {
+  font-weight: 700;
+}
+
+input,
+button,
+textarea,
+select {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+label,
+input,
+textarea,
+select {
   display: block;
   width: 100%;
+}
+
+label {
   padding: 1rem;
 }
 
-input, select {
+input,
+select {
   height: 3rem;
+  padding: 0 1rem;
+}
+
+textarea {
+  min-height: 9rem;
+  padding: 1rem;
+  resize: vertical;
+}
+
+input,
+textarea,
+select {
+  background: var(--mono-bg);
+  border: 1px solid var(--mono-border);
+  border-radius: 0;
+}
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background: var(--mono-light);
+  cursor: not-allowed;
+}
+
+input[type=checkbox],
+input[type=radio] {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  margin-right: 0.5rem;
 }
 
 .btn, button {
-  line-height: 3rem;
-  border: 1px solid #0F4C81;
-  color: #0F4C81;
-  text-align: center;
   display: block;
   width: 100%;
+  padding: 0 1rem;
+  border: 1px solid var(--mono-link);
+  background: transparent;
+  color: var(--mono-link);
+  line-height: 3rem;
+  text-align: center;
+  cursor: pointer;
 }
-
 .btn:hover, button:hover {
-  background: #0F4C81;
-  color: #fff;
+  background: var(--mono-link);
+  color: var(--mono-bg);
   text-decoration: none;
 }
-
-input, textarea, select {
-  background: #fff;
-  border: 1px solid #e6e6e6;
-  border-radius: 0;
-}
-
-input:disabled, textarea:disabled, select:disabled {
-  background: #e6e6e6;
+.btn:disabled, button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .block {
@@ -184,31 +328,22 @@ input:disabled, textarea:disabled, select:disabled {
 }
 
 .alert {
-  background: #ffeaa7;
+  background: var(--mono-alert);
   padding: 1rem;
 }
 
 .card {
   padding: 1rem;
   margin: 1rem 0;
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--mono-light);
 }
 
-code {
-  background: #e6e6e6;
-  padding: 2px 6px;
+.transition {
+  transition: all 0.3s;
 }
 
-pre {
-  background: #e6e6e6;
-  padding: 1rem;
-  overflow-x: scroll;
-}
-
-hr {
-  border: 0;
-  border-top: 1px solid #e6e6e6;
-  margin: 2rem 0;
+.text-left {
+  text-align: left;
 }
 
 @media (min-width: 768px) {
@@ -217,25 +352,9 @@ hr {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   .text-left-small {
     text-align: left;
-  }
-}
-
-.text-left {
-  text-align: left;
-}
-
-@media (min-width: 768px) {
-  .text-center-large {
-    text-align: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .text-center-small {
-    text-align: center;
   }
 }
 
@@ -244,14 +363,14 @@ hr {
 }
 
 @media (min-width: 768px) {
-  .text-right-large {
-    text-align: right;
+  .text-center-large {
+    text-align: center;
   }
 }
 
-@media (max-width: 768px) {
-  .text-right-small {
-    text-align: right;
+@media (max-width: 767.98px) {
+  .text-center-small {
+    text-align: center;
   }
 }
 
@@ -259,32 +378,14 @@ hr {
   text-align: right;
 }
 
-h1::before {
-  padding-right: 1rem;
-  content: "#";
+@media (min-width: 768px) {
+  .text-right-large {
+    text-align: right;
+  }
 }
 
-h2::before {
-  padding-right: 1rem;
-  content: "##";
-}
-
-h3::before {
-  padding-right: 1rem;
-  content: "###";
-}
-
-h4::before {
-  padding-right: 1rem;
-  content: "####";
-}
-
-h5::before {
-  padding-right: 1rem;
-  content: "#####";
-}
-
-h6::before {
-  padding-right: 1rem;
-  content: "######";
+@media (max-width: 767.98px) {
+  .text-right-small {
+    text-align: right;
+  }
 }

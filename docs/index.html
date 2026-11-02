@@ -1,110 +1,125 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Monospaced CSS by Andrea Rufo</title>
-
-	<link rel="stylesheet" href="monospaced.min.css">
-    <!-- <link rel="stylesheet" href="../dist/monospaced.min.css"> -->
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="monospaced.css: a super simple, monospaced, flat stylesheet for simple pages.">
+  <title>monospaced.css by Andrea Rufo</title>
+  <link rel="stylesheet" href="monospaced.min.css">
 </head>
 <body>
+  <main class="container">
 
-    <div class="container">
+    <h1>monospaced.css</h1>
+    <p>A super simple, monospaced, flat stylesheet for simple pages. A project by <a href="https://www.andrearufo.it">Andrea Rufo</a>.</p>
+    <p>Source on <a href="https://github.com/andrearufo/monospaced.css">github.com/andrearufo/monospaced.css</a></p>
 
-        <h1>Monospaced.css</h1>
-        <p>A project by Andrea Rufo.</p>
-        <p>Official repository on <a href="https://github.com/andrearufo/monospaced.css">github.com/andrearufo/monospaced.css</a></p>
+    <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andrearufo/monospaced.css@1.0.0/dist/monospaced.min.css"&gt;</code></pre>
 
-        <hr>
+    <hr>
 
-        <h2>Headings</h2>
+    <h2>Headings</h2>
+    <h2>Lorem ipsum for h2</h2>
+    <h3>Lorem ipsum for h3</h3>
+    <h4>Lorem ipsum for h4</h4>
+    <h5>Lorem ipsum for h5</h5>
+    <h6>Lorem ipsum for h6</h6>
 
-        <h2>Lorem ipsum for h2</h2>
-        <h3>Lorem ipsum for h3</h3>
-        <h4>Lorem ipsum for h4</h4>
-        <h5>Lorem ipsum for h5</h5>
-        <h6>Lorem ipsum for h6</h6>
+    <hr>
 
-        <hr>
+    <h2>Paragraphs</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p><img src="https://picsum.photos/seed/monospaced/1200/800" width="1200" height="800" alt="A sample photo"></p>
+    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-        <h2>Paragraphs</h2>
+    <blockquote>Simplicity is prerequisite for reliability. A blockquote, for the record.</blockquote>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    <h3>Align</h3>
+    <p class="text-left">Text align left</p>
+    <p class="text-center">Text align center</p>
+    <p class="text-right">Text align right</p>
+    <p class="text-center-small">Text align center on small devices</p>
+    <p class="text-right-large">Text align right on large devices</p>
 
-        <p><img src="https://source.unsplash.com/random/1200x800" alt="A random image from Unsplash"></p>
+    <hr>
 
-        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <h2>Lists</h2>
+    <ul>
+      <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+      <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+      <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</li>
+    </ul>
+    <ol>
+      <li>First item</li>
+      <li>Second item</li>
+      <li>Third item</li>
+    </ol>
 
-        <h3>Align</h3>
+    <hr>
 
-        <p class="text-left">Text align left</p>
-        <p class="text-center">Text align center</p>
-        <p class="text-right">Text align right</p>
+    <h2>Table</h2>
+    <table>
+      <thead>
+        <tr><th>Class</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>.container</code></td><td>Centered page wrapper</td></tr>
+        <tr><td><code>.card</code></td><td>Bordered box</td></tr>
+        <tr><td><code>.alert</code></td><td>Highlighted message</td></tr>
+        <tr><td><code>.btn</code></td><td>Button style for links</td></tr>
+      </tbody>
+    </table>
 
-        <p class="text-left-small">Text align left on small devices</p>
-        <p class="text-center-small">Text align center on small devices</p>
-        <p class="text-right-small">Text align right on small devices</p>
+    <hr>
 
-        <p class="text-left-large">Text align left on large devices</p>
-        <p class="text-center-large">Text align center on large devices</p>
-        <p class="text-right-large">Text align right on large devices</p>
-
-        <hr>
-
-        <h2>List</h2>
-
-        <ul>
-            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
-            <li>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
-            <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-            <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
-        </ul>
-
-        <hr>
-
-        <h2>Card</h2>
-
-        <div class="card">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-
-        <hr>
-
-        <h2>Forms</h2>
-
-        <div class="block">
-            <label for="text">Text input</label>
-            <input type="text" name="text" placeholder="This is a sample text input">
-        </div>
-        <div class="block">
-            <label for="select">Select input</label>
-            <select name="select">
-                <option value="null">This is a select</option>
-            </select>
-        </div>
-        <button type="button" class>And this is a button!</button>
-
-        <hr>
-
-        <h2>Alert</h2>
-
-        <div class="alert">This is an alert... Keep calm and code!</div>
-
-        <hr>
-
-        <h2>Others</h2>
-
-        <p>This is a <code>code tag</code>.</p>
-        <p>And this is a <strong>strong text</strong> end an <em>emphasized text</em>.</p>
-
+    <h2>Card</h2>
+    <div class="card">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     </div>
 
+    <hr>
+
+    <h2>Forms</h2>
+    <form onsubmit="return false">
+      <div class="block">
+        <label for="text">Text input</label>
+        <input type="text" id="text" name="text" placeholder="This is a sample text input">
+      </div>
+      <div class="block">
+        <label for="select">Select input</label>
+        <select id="select" name="select">
+          <option>This is a select</option>
+          <option>Another option</option>
+        </select>
+      </div>
+      <div class="block">
+        <label for="message">Textarea</label>
+        <textarea id="message" name="message" placeholder="Write something..."></textarea>
+      </div>
+      <div class="block">
+        <label for="disabled">Disabled input</label>
+        <input type="text" id="disabled" value="You can't touch this" disabled>
+      </div>
+      <div class="block">
+        <label><input type="checkbox" checked> A checkbox</label>
+      </div>
+      <div class="block">
+        <button type="submit">And this is a button!</button>
+      </div>
+    </form>
+    <a class="btn" href="#">And this is a link styled as a button</a>
+
+    <hr>
+
+    <h2>Alert</h2>
+    <div class="alert">This is an alert... Keep calm and code!</div>
+
+    <hr>
+
+    <h2>Others</h2>
+    <p>This is a <code>code tag</code>.</p>
+    <p>And this is a <strong>strong text</strong> and an <em>emphasized text</em>.</p>
+
+  </main>
 </body>
 </html>
